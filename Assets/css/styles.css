@@ -35,3 +35,13 @@ th, td{
 .surname {
     color: orange;
 }
+
+.buttn-1 {
+    background-color: aliceblue;
+    size: 130px;
+    border-radius: 10%;
+    position: relative;
+    left: 50%;
+    margin-top: 5%;
+    
+}

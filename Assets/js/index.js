@@ -1,4 +1,4 @@
-$( "#button" ).click(function() {
+$("#button").click(function() {
     const key = '85d1a1b23da244759c4175025230805'
     const city = 'Sinsheim'
     const settings = {
@@ -7,7 +7,6 @@ $( "#button" ).click(function() {
         url: `https://api.weatherapi.com/v1/current.json?key=${key}&q=${city}&aqi=no`,
         method: 'GET',
     };
-    
     $.ajax(settings).done(function (response) {
         //City Name
         let para1 = document.createElement("p");
