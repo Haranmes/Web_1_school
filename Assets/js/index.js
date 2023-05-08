@@ -23,7 +23,7 @@ $("#button").click(function() {
         //condition
         document.getElementById("condition").src=response.current.condition.icon
         //console.log(response);
-        $("#button").remove()
+        document.getElementById("button").disabled = true;
     });
 });
  

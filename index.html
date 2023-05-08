@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="Assets/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    
     <title>APIs - Was sind das?</title>
 </head>
 <body>
@@ -19,37 +18,47 @@
             Die Schnittstellen dienen quasi als Zugangspunkt für eine andere Software.
         </p>
         <hr style="margin-top: 5%">
-        <h2 class="title surname">Wetter</h2>
-        <hr>
-        <table class="table-1" >
-            <tbody>
-                <tr>
-                    <th>
-                        Stadt
-                    </th>
-                    <th>
-                        Temperatur
-                    </th>
-                    <th>
-                        Condition
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <span class="name" id="name"></span>
-                    </td>
-                    <td>
-                        <span class="temp" id="temp"></span> 
-                    </td>
-                    <td>
-                        <img class="condition" id="condition" src="" alt="wetter">
-                    </td>
-                </tr>
-            </tbody>
+        <table>
+            <tr>
+                <th>
+                    <h2 class="title surname">Wetter</h2>
+                    <hr>
+                </th>
+            
+            </tr>
+            <tr>
+                <td>
+                    <table class="table-1" >
+                        <tbody>
+                            <tr>
+                                <th>
+                                    Stadt
+                                </th>
+                                <th>
+                                    Temperatur
+                                </th>
+                                <th>
+                                    Condition
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="name" id="name"></span>
+                                </td>
+                                <td>
+                                    <span class="temp" id="temp"></span> 
+                                </td>
+                                <td>
+                                    <img class="condition" id="condition" src="" alt="wetter">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
         </table>
-        <button type="button" id="button" class="buttn-1">Wetter update!</button>
+    <button type="button" id="button" class="buttn-1">Wetter update!</button>
 </body>
 <script type="text/javascript" src="Assets/js/index.js"></script>
-
 </html>
 
