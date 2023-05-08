@@ -5,40 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Assets/css/styles.css">
-    <script type="text/javascript" src="Assets/js/index.js"></script>
-    <title>Meine Webseite</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <title>Wetter</title>
 </head>
 <body>
-    <h1 class="title">Ramez <span class="surname">Soliman</span></h1>
-    <img class="img-1" src="Assets/img/unnamed.jpg" alt="Ramez bin ich" >
+    <h1 class="title surname">Wetter</h1>
     <hr>
     <table class="table-1" >
         <tbody>
             <tr>
                 <th>
-                    Name
+                    Stadt
                 </th>
                 <th>
-                    Alter
+                    Temperatur
                 </th>
                 <th>
-                    Schule
+                    Condition
                 </th>
             </tr>
             <tr>
                 <td>
-                    Ramez
+                    <span class="name" id="name"></span>
                 </td>
                 <td>
-                    19
+                    <span class="temp" id="temp"></span> 
                 </td>
                 <td>
-                    FHS
+                    <img class="condition" id="condition" src="" alt="wetter">
                 </td>
             </tr>
         </tbody>
     </table>
-    <button type="button" id="button">Press for color change!</button>
+    
+    <button type="button" id="button">Wetter update!</button>
 </body>
+<script type="text/javascript" src="Assets/js/index.js"></script>
 </html>
 
