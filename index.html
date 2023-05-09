@@ -1,64 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Assets/css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <title>APIs - Was sind das?</title>
 </head>
+
 <body>
+    <div class="center">
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="pages/images.html">Image Generation with DAll-E</a></li>
+        </ul>
+    </div>
     <h1 class="title" style="margin-top: 5%;">Was sind APIs?</h1>
-        <p style="text-align: center; padding-top: 2%; padding-right: 20%; padding-left: 20%;">
-            API steht für "Application Programming Interface" und lässt sich als Programmierschnittstelle übersetzen.<br>
-            Eine API ist ein Satz von Befehlen, Funktionen, Protokollen und Objekten, die Programmierer verwenden können, um eine Software zu erstellen oder mit einem externen System zu interagieren.<br> 
-            Beim Programmieren vereinheitlichen APIs die Datenübergabe zwischen Programmteilen, etwa Modulen, und Programmen.<br> 
-            Die Schnittstellen dienen quasi als Zugangspunkt für eine andere Software.
-        </p>
-        <hr style="margin-top: 5%">
-        <table>
+    <p style="text-align: center; padding-top: 2%; padding-right: 20%; padding-left: 20%;">
+        API steht für "Application Programming Interface" und lässt sich als Programmierschnittstelle übersetzen.<br>
+        Eine API ist ein Satz von Befehlen, Funktionen, Protokollen und Objekten, die Programmierer verwenden können, um
+        eine Software zu erstellen oder mit einem externen System zu interagieren.<br>
+        Beim Programmieren vereinheitlichen APIs die Datenübergabe zwischen Programmteilen, etwa Modulen, und
+        Programmen.<br>
+        Die Schnittstellen dienen quasi als Zugangspunkt für eine andere Software.
+    </p>
+    <hr style="margin-top: 5%">
+    <h2 class="title surname">Wetter</h2>
+    <table class="table-1">
+        <tbody>
             <tr>
                 <th>
-                    <h2 class="title surname">Wetter</h2>
-                    <hr>
+                    Stadt
                 </th>
-            
+                <th>
+                    Temperatur
+                </th>
+                <th>
+                    Condition
+                </th>
             </tr>
             <tr>
                 <td>
-                    <table class="table-1" >
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Stadt
-                                </th>
-                                <th>
-                                    Temperatur
-                                </th>
-                                <th>
-                                    Condition
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <span class="name" id="name"></span>
-                                </td>
-                                <td>
-                                    <span class="temp" id="temp"></span> 
-                                </td>
-                                <td>
-                                    <img class="condition" id="condition" src="" alt="wetter">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <span class="name" id="name"></span>
+                </td>
+                <td>
+                    <span class="temp" id="temp"></span>
+                </td>
+                <td>
+                    <img class="condition" id="condition" src="" alt="wetter">
                 </td>
             </tr>
-        </table>
-    <button type="button" id="button" class="buttn-1">Wetter update!</button>
+            <tr>
+                <td>
+                    <button type="button" id="update" class="buttn-1">Wetter update!</button>
+                </td>
+                <td>
+                    <button type="button" id="reset" class="buttn-1">Reset Button!</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
-<script type="text/javascript" src="Assets/js/index.js"></script>
-</html>
+<script type="text/javascript" src="Assets/js/script_1.js"></script>
 
+</html>

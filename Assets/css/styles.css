@@ -10,6 +10,7 @@ body {
     margin-right: auto;
     text-align: center;
     font-family: 'Poppins', sans-serif;
+    margin-top: 5%;
 }
 
 .table-1 {
@@ -40,8 +41,45 @@ th, td{
     background-color: aliceblue;
     size: 130px;
     border-radius: 10%;
-    position: relative;
-    left: 50%;
-    margin-top: 5%;
     
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    
+}
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+  
+.nav-item {
+    float: left;
+    position: relative;
+    text-align: center;
+}
+  
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+li a:hover {
+    background-color: #111;
+    color: orange;
+}
+
+/*page 2*/
+
+.form1 {
+    text-align: center;
+}
+
+
