@@ -80,6 +80,13 @@ li a:hover {
 
 .form1 {
     text-align: center;
+    display: block;
+}
+label {
+    display:block;
+}
+textarea { 
+    display:block;
 }
 
 
