@@ -37,6 +37,5 @@ $("#reset").click(function() {
     document.getElementById("update").disabled = false;
     for(let id of e_array) {
         document.getElementById(id).remove()
-        
     }
 })
