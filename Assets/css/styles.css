@@ -135,6 +135,10 @@ textarea {
   font-family: arial;
 }
 
+.role {
+  font-size: 30px;
+  font-family: "Valorant";
+}
 /*Animations*/
 @keyframes fadeInUp {
   from {
