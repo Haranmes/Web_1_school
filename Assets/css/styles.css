@@ -139,6 +139,28 @@ textarea {
   font-size: 30px;
   font-family: "Valorant";
 }
+
+.collapsible {
+  font-family: "Valorant";
+  margin-right: auto;
+  font-size: 2vw;
+  cursor: pointer;
+  padding: 18px;
+  text-align: center;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.agents {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+}
+
 /*Animations*/
 @keyframes fadeInUp {
   from {
