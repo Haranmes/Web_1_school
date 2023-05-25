@@ -9,9 +9,6 @@ let y = 0;
 let x = 0;
 let yt;
 const elements = document.getElementById("agents");
-
-
-
 window.addEventListener("load", (event) => {
   document.getElementsByTagName("body")[0].style.backgroundColor = "black";
   const settings = {
@@ -74,19 +71,31 @@ window.addEventListener("load", (event) => {
         element.appendChild(para);
 
         //youtube video embed
-        let search = data.displayName
-        let API_KEY = "AIzaSyDQRccpeIgVBH01edFJMHayLI_2njHPv5E"
-        videoSearch(API_KEY, search,1)
+        let search = `${data.displayName} agent trailer`
+        let API_KEY = "AIzaSyCNc11XDWQu91gya1CVsdAPDZTNNxWTJUM"
+        videoSearch(API_KEY, search,1, element)
       }
     }
   });
 });
 
-function videoSearch(key, search, maxResults) {
-  $.get(`https://www.googleapis.com/youtube/v3/search?key=${key}&type=video&part=snippet&maxResult=${maxResults}&q=${search}`, function(response) {
-    console.log(data)
-  })
+function videoSearch(key, search, maxResults, parent) {
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url: `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${search}&type=video&key=${key}`,
+    method: "GET",
+  };
+  $.ajax(settings).done(function (response) {
+    let id = response.items[0].id.videoId
+    let iframe = document.createElement("iframe")
+    iframe.src = `https://www.youtube.com/embed/${id}`
+    iframe.height = "315"
+    iframe.width = "512"
+    parent.appendChild(iframe)
+  });
 }
+
 let coll = document.getElementsByClassName("collapsible");
 
 for (let i of coll) {
