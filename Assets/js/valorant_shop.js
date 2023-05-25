@@ -73,7 +73,7 @@ window.addEventListener("load", (event) => {
         //youtube video embed
         let search = `${data.displayName} agent trailer`
         let API_KEY = "AIzaSyCNc11XDWQu91gya1CVsdAPDZTNNxWTJUM"
-        videoSearch(API_KEY, search,1, element)
+        videoSearch(API_KEY, search, 1, element)
       }
     }
   });
@@ -97,7 +97,6 @@ function videoSearch(key, search, maxResults, parent) {
 }
 
 let coll = document.getElementsByClassName("collapsible");
-
 for (let i of coll) {
   i.addEventListener("click", function () {
     this.classList.toggle("active");
