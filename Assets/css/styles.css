@@ -97,7 +97,6 @@ textarea {
 /*valorant shop*/
 
 .val-title {
-  
   font-family: "Valorant";
   margin-right: auto;
   text-align: center;
@@ -161,6 +160,37 @@ textarea {
   overflow: hidden;
 }
 
+/*Calender*/
+.date-center {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.kalender {
+  color: white;
+}
+
+.grid-container {
+  display: grid;
+  justify-content: center;
+  column-gap: 0;
+  margin-right: auto;
+  text-align: center;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 7%;
+  
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border:rgba(0, 0, 0, 0.2) solid;
+  
+}
+
 /*Animations*/
 @keyframes fadeInUp {
   from {
@@ -208,6 +238,7 @@ textarea {
   -o-animation: fadein 2s; /* Opera < 12.1 */
   animation: fadein 2s;
 }
+
 
 @keyframes fadein {
   from {
