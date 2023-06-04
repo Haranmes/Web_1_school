@@ -1,8 +1,3 @@
-var startDates = [];
-var endDate = [];
-var m = [];
-var d = [];
-var holiday = [];
 let btn;
 let btn_grid;
 const date = new Date();
@@ -15,6 +10,7 @@ if (date.getMonth() < 10) {
     var curr_month_num = date.getMonth() + 1
 }
 
+//default
 window.addEventListener("load", (event) => {
     document.getElementsByTagName("body")[0].style.backgroundImage = "linear-gradient(90deg, #5142f5, #8209e6)";
     const elements = document.getElementById("kalender")
@@ -48,6 +44,7 @@ window.addEventListener("load", (event) => {
         method: "GET",
     };
     $.ajax(settings).done(function (response) {
+        var count = 0;
         var to_day_new = new Date(`${curr_year}-${curr_month_num - 1}-${days_last}`).getDay()
         for (var day = 1; day <= to_day_new; day++) {
             grid_item = document.createElement("div")
@@ -57,8 +54,9 @@ window.addEventListener("load", (event) => {
             node = document.createTextNode(" ")
             grid_item.appendChild(node)
             element.appendChild(grid_item)
+            count++;
         }
-
+        
         for (var day = 1; day <= days; day++) {
             grid_item = document.createElement("div")
             grid_item.setAttribute("class", "grid-item")
@@ -82,9 +80,13 @@ window.addEventListener("load", (event) => {
                 grid_item.appendChild(div)
             }
             element.appendChild(grid_item)
+            count++
         }
-
-        var coll_left = 32 - days;
+        let check = count
+        while(check % 7 !== 0) {
+            check++;
+        }
+        var coll_left = check - count 
         for (let colls = 0; colls < coll_left; colls++) {
             grid_item = document.createElement("div")
             grid_item.setAttribute("class", "grid-item")
@@ -138,6 +140,7 @@ function btn_back_click() {
 
 let int_month = parseInt(curr_month_num)
 let skips = 0;
+
 function showSlides(n) {
     skips += n
     console.log(skips)
@@ -157,14 +160,14 @@ function showSlides(n) {
     }
 }
 
-
 function isValidDate(d) {
     return d instanceof Date && !isNaN(d);
 }
 
-function update(curr_date, curr_month_num, curr_year) {
-    var days = new Date(curr_year, curr_month_num, 0).getDate()
-    var days_last = new Date(curr_year, curr_month_num - 1, 0).getDate()
+function update(curr_date, curr_month_n, curr_year) {
+    var count = 0;
+    var days = new Date(curr_year, curr_month_n, 0).getDate()
+    var days_last = new Date(curr_year, curr_month_n - 1, 0).getDate()
     let settings = {
         async: true,
         crossDomain: true,
@@ -172,8 +175,7 @@ function update(curr_date, curr_month_num, curr_year) {
         method: "GET",
     };
     $.ajax(settings).done(function (response) {
-        console.log("current month num " + curr_month_num)
-        var to_day_new = new Date(`${curr_year}-${curr_month_num - 1}-${days_last}`).getDay()
+        var to_day_new = new Date(`${curr_year}-${curr_month_n - 1}-${days_last}`).getDay()
         var grid_item_empty = document.querySelectorAll("#empty")
         grid_item_empty.forEach(element => element.remove());
         let element = document.getElementById("grid-container")
@@ -185,22 +187,26 @@ function update(curr_date, curr_month_num, curr_year) {
             node = document.createTextNode(" ")
             grid_item.appendChild(node)
             element.appendChild(grid_item)
+            count++
         }
         var grid_item_set = document.querySelectorAll("#day_name")
         grid_item_set.forEach(element => element.remove());
+        
         for (var day = 1; day <= days; day++) {
             grid_item = document.createElement("div")
             grid_item.setAttribute("class", "grid-item")
             grid_item.setAttribute("id", "day_name")
-            if (day == curr_day) {
-                grid_item.style = "background-color: blue;"
+            if(curr_month_num == curr_month_n) {
+                if (day == curr_day) {
+                    grid_item.style = "background-color: blue;"
+                }
             }
             node = document.createTextNode(day)
             grid_item.appendChild(node)
             if (day < 10) {
-                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-0${day}`)
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_n}-0${day}`)
             } else {
-                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-${day}`)
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_n}-${day}`)
             }
             if (obje_selected.length != 0) {
                 div = document.createElement("p")
@@ -211,14 +217,19 @@ function update(curr_date, curr_month_num, curr_year) {
                 grid_item.appendChild(div)
             }
             element.appendChild(grid_item)
+            count++;
         }
 
-        var coll_left = 32 - days;
+        let check = count
+        while(check % 7 !== 0) {
+            check++;
+        }
+        var coll_left = check - count 
+
         for (let colls = 0; colls < coll_left; colls++) {
             grid_item = document.createElement("div")
             grid_item.setAttribute("class", "grid-item")
             grid_item.setAttribute("id", "empty")
-
             node = document.createTextNode(" ")
             grid_item.appendChild(node)
             element.appendChild(grid_item)
