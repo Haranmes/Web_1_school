@@ -3,18 +3,20 @@ var endDate = [];
 var m = [];
 var d = [];
 var holiday = [];
+let btn;
+let btn_grid;
+const date = new Date();
+const curr_day = date.getDate()
+const curr_year = date.getFullYear()
+const curr_month = date.toLocaleString('default', { month: 'long' });
+if (date.getMonth() < 10) {
+    var curr_month_num = `0${date.getMonth() + 1}`
+} else {
+    var curr_month_num = date.getMonth() + 1
+}
+
 window.addEventListener("load", (event) => {
     document.getElementsByTagName("body")[0].style.backgroundImage = "linear-gradient(90deg, #5142f5, #8209e6)";
-    const date = new Date();
-    const curr_day = date.getDate()
-    const curr_year = date.getFullYear()
-    const curr_month = date.toLocaleString('default', { month: 'long' });
-    if (date.getMonth() < 10) {
-        var curr_month_num = `0${date.getMonth() + 1}`
-    } else {
-        var curr_month_num = date.getMonth() + 1
-    }
-    console.log(curr_month_num)
     const elements = document.getElementById("kalender")
     let header = document.createElement("h1")
     header.setAttribute("id", "curr_month")
@@ -24,20 +26,21 @@ window.addEventListener("load", (event) => {
     elements.appendChild(header)
     let div = document.createElement("div")
     div.setAttribute("id", "grid-container")
-    div.setAttribute("class", "grid-container")
+    div.setAttribute("class", "grid-container mySlides")
     elements.appendChild(div)
-    const element = document.getElementById("grid-container")
+    let element = document.getElementById("grid-container")
     var weekDays = getWeekDays("de-DE", curr_year)
     for (let day of weekDays) {
         var grid_item = document.createElement("div")
         grid_item.setAttribute("class", "grid-item")
-        grid_item.setAttribute("id", "day")
+        grid_item.setAttribute("id", day)
         grid_item.style = "font-size: 1vw;"
         node = document.createTextNode(day)
         grid_item.appendChild(node)
         element.appendChild(grid_item)
     }
-    let days = new Date(curr_year, curr_year, 0).getDate()
+    var days = new Date(curr_year, curr_month_num, 0).getDate()
+    var days_last = new Date(curr_year, curr_month_num - 1, 0).getDate()
     let settings = {
         async: true,
         crossDomain: true,
@@ -45,20 +48,32 @@ window.addEventListener("load", (event) => {
         method: "GET",
     };
     $.ajax(settings).done(function (response) {
-        for (let day = 1; day <= days; day++) {
+        var to_day_new = new Date(`${curr_year}-${curr_month_num - 1}-${days_last}`).getDay()
+        for (var day = 1; day <= to_day_new; day++) {
+            grid_item = document.createElement("div")
+            grid_item.setAttribute("class", "grid-item")
+            grid_item.setAttribute("id", "empty")
+
+            node = document.createTextNode(" ")
+            grid_item.appendChild(node)
+            element.appendChild(grid_item)
+        }
+
+        for (var day = 1; day <= days; day++) {
             grid_item = document.createElement("div")
             grid_item.setAttribute("class", "grid-item")
             grid_item.setAttribute("id", "day_name")
-
             if (day == curr_day) {
                 grid_item.style = "background-color: blue;"
             }
             node = document.createTextNode(day)
             grid_item.appendChild(node)
-
-            let obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-${day}`)
+            if (day < 10) {
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-0${day}`)
+            } else {
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-${day}`)
+            }
             if (obje_selected.length != 0) {
-                console.log(obje_selected[0].name[0].text)
                 div = document.createElement("p")
                 node = document.createTextNode(`${obje_selected[0].name[0].text}`)
                 grid_item.style = "background-color: brown;"
@@ -68,7 +83,39 @@ window.addEventListener("load", (event) => {
             }
             element.appendChild(grid_item)
         }
+
+        var coll_left = 32 - days;
+        for (let colls = 0; colls < coll_left; colls++) {
+            grid_item = document.createElement("div")
+            grid_item.setAttribute("class", "grid-item")
+            grid_item.setAttribute("id", "empty")
+
+            node = document.createTextNode(" ")
+            grid_item.appendChild(node)
+            element.appendChild(grid_item)
+        }
     });
+    btn_grid = document.createElement("div")
+    btn_grid.style = "display: flex; justify-content: center;"
+    btn_grid.setAttribute("id", "btn_grid")
+    elements.appendChild(btn_grid)
+
+    btn = document.createElement("button")
+    btn.type = "button"
+    btn.setAttribute("id", "btn_back")
+    btn.addEventListener("click", btn_back_click)
+    node = document.createTextNode("Zurück")
+    btn.appendChild(node)
+    btn_grid.appendChild(btn)
+
+    btn = document.createElement("button")
+    btn.type = "button"
+    btn.setAttribute("id", "btn_next")
+    btn.addEventListener("click", btn_next_click)
+    node = document.createTextNode("Nächster Monat")
+    btn.appendChild(node)
+    btn_grid.appendChild(btn)
+
 });
 
 function getWeekDays(locale, year) {
@@ -81,8 +128,102 @@ function getWeekDays(locale, year) {
     return weekDays;
 }
 
-window.addEventListener("scroll", function() {
-    
-})
+function btn_next_click() {
+    showSlides(1)
+}
+
+function btn_back_click() {
+    showSlides(-1)
+}
+
+let int_month = parseInt(curr_month_num)
+let skips = 0;
+function showSlides(n) {
+    skips += n
+    console.log(skips)
+    let int_month = parseInt(curr_month_num)
+    let new_date = new Date(`${curr_year}-0${int_month += skips}-1`)
+    if (isValidDate(new_date)) {
+        //keine ahnung wie ich jetzt heraudfinde ob ende monat oder anfang monat. macht zukunftsramez
+        let new_month = new_date.toLocaleString('default', { month: 'long' });
+        let new_year = new_date.getFullYear()
+        header = document.querySelector("#curr_month")
+        let textNode = header.firstChild;
+        // change the value of the text node
+        let month = new_date.getMonth() + 1
+        console.log("month " + month)
+        textNode.nodeValue = `${new_month} ${new_year}`;
+        update(new_date, month, new_year)
+    }
+}
+
+
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
+
+function update(curr_date, curr_month_num, curr_year) {
+    var days = new Date(curr_year, curr_month_num, 0).getDate()
+    var days_last = new Date(curr_year, curr_month_num - 1, 0).getDate()
+    let settings = {
+        async: true,
+        crossDomain: true,
+        url: `https://openholidaysapi.org/PublicHolidays?countryIsoCode=DE&languageIsoCode=DE&validFrom=${curr_year}-01-01&validTo=${curr_year}-12-31&subdivisionCode=DE-BE`,
+        method: "GET",
+    };
+    $.ajax(settings).done(function (response) {
+        console.log("current month num " + curr_month_num)
+        var to_day_new = new Date(`${curr_year}-${curr_month_num - 1}-${days_last}`).getDay()
+        var grid_item_empty = document.querySelectorAll("#empty")
+        grid_item_empty.forEach(element => element.remove());
+        let element = document.getElementById("grid-container")
+        for (var day = 1; day <= to_day_new; day++) {
+            grid_item = document.createElement("div")
+            grid_item.setAttribute("class", "grid-item")
+            grid_item.setAttribute("id", "empty")
+
+            node = document.createTextNode(" ")
+            grid_item.appendChild(node)
+            element.appendChild(grid_item)
+        }
+        var grid_item_set = document.querySelectorAll("#day_name")
+        grid_item_set.forEach(element => element.remove());
+        for (var day = 1; day <= days; day++) {
+            grid_item = document.createElement("div")
+            grid_item.setAttribute("class", "grid-item")
+            grid_item.setAttribute("id", "day_name")
+            if (day == curr_day) {
+                grid_item.style = "background-color: blue;"
+            }
+            node = document.createTextNode(day)
+            grid_item.appendChild(node)
+            if (day < 10) {
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-0${day}`)
+            } else {
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_num}-${day}`)
+            }
+            if (obje_selected.length != 0) {
+                div = document.createElement("p")
+                node = document.createTextNode(`${obje_selected[0].name[0].text}`)
+                grid_item.style = "background-color: brown;"
+                div.style = "font-size: 10px;"
+                div.appendChild(node)
+                grid_item.appendChild(div)
+            }
+            element.appendChild(grid_item)
+        }
+
+        var coll_left = 32 - days;
+        for (let colls = 0; colls < coll_left; colls++) {
+            grid_item = document.createElement("div")
+            grid_item.setAttribute("class", "grid-item")
+            grid_item.setAttribute("id", "empty")
+
+            node = document.createTextNode(" ")
+            grid_item.appendChild(node)
+            element.appendChild(grid_item)
+        }
+    });
+}
 
 

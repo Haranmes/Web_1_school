@@ -179,8 +179,9 @@ textarea {
   text-align: center;
   grid-template-columns: repeat(7, 1fr);
   padding: 7%;
-  
 }
+
+
 
 .grid-item {
   display: flex;

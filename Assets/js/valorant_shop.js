@@ -72,7 +72,7 @@ window.addEventListener("load", (event) => {
 
         //youtube video embed
         let search = `${data.displayName} agent trailer`
-        let API_KEY = "AIzaSyCNc11XDWQu91gya1CVsdAPDZTNNxWTJUM"
+        let API_KEY = "AIzaSyBrV66SkYbpyjj7arQ40xNLMBKDyHElh3U"
         videoSearch(API_KEY, search, 1, element)
       }
     }
@@ -99,8 +99,8 @@ function videoSearch(key, search, maxResults, parent) {
 let coll = document.getElementsByClassName("collapsible");
 for (let i of coll) {
   i.addEventListener("click", function () {
-    this.classList.toggle("active");
-    let content = this.nextElementSibling;
+    this.classList.toggle("active"); //how does it work??
+    let content = this.nextElementSibling; //why does it work??
     if (content.style.display === "flex") {
       content.style.display = "none";
     } else {
@@ -108,3 +108,4 @@ for (let i of coll) {
     }
   });
 }
+

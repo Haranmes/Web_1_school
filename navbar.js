@@ -47,7 +47,7 @@ window.addEventListener("load", (event) => {
     const elements = document.getElementById("nav")
     
     for (let data of pages) {
-        if (curr_page != data.path) {
+        //if (curr_page != data.path) {
             let name = data.name
             li = document.createElement("li")
             li.setAttribute("class", "nav-item")
@@ -58,6 +58,6 @@ window.addEventListener("load", (event) => {
             a.appendChild(node)
             li.appendChild(a)
             elements.appendChild(li)
-        }
+        //}
     }
 });
