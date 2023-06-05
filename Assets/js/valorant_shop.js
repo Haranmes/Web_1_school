@@ -18,7 +18,6 @@ window.addEventListener("load", (event) => {
     method: "GET",
   };
   $.ajax(settings).done(function (response) {
-    console.log(response.data);
     for (let data of response.data) {
       if (data.isPlayableCharacter == true) {
         //Creates the Parent div for Agent cards

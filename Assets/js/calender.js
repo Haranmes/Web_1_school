@@ -4,7 +4,7 @@ const date = new Date();
 const curr_day = date.getDate()
 const curr_year = date.getFullYear()
 const curr_month = date.toLocaleString('default', { month: 'long' });
-if (date.getMonth() < 10) {
+if (date.getMonth() + 1 < 10) {
     var curr_month_num = `0${date.getMonth() + 1}`
 } else {
     var curr_month_num = date.getMonth() + 1
@@ -143,7 +143,6 @@ let skips = 0;
 
 function showSlides(n) {
     skips += n
-    console.log(skips)
     let int_month = parseInt(curr_month_num)
     let new_date = new Date(`${curr_year}-0${int_month += skips}-1`)
     if (isValidDate(new_date)) {
@@ -153,8 +152,11 @@ function showSlides(n) {
         header = document.querySelector("#curr_month")
         let textNode = header.firstChild;
         // change the value of the text node
-        let month = new_date.getMonth() + 1
-        console.log("month " + month)
+        if (new_date.getMonth() + 1 < 10) {
+            var month = `0${new_date.getMonth() + 1}`
+        } else {
+            var month = new_date.getMonth() + 1
+        }
         textNode.nodeValue = `${new_month} ${new_year}`;
         update(new_date, month, new_year)
     }
@@ -190,7 +192,7 @@ function update(curr_date, curr_month_n, curr_year) {
             count++
         }
         var grid_item_set = document.querySelectorAll("#day_name")
-        grid_item_set.forEach(element => element.remove());
+        grid_item_set.forEach(element => element.remove());         //löschen der Elemente
         
         for (var day = 1; day <= days; day++) {
             grid_item = document.createElement("div")
@@ -204,7 +206,7 @@ function update(curr_date, curr_month_n, curr_year) {
             node = document.createTextNode(day)
             grid_item.appendChild(node)
             if (day < 10) {
-                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_n}-0${day}`)
+                var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_n}-0${day}`)//`${curr_year}-${curr_month_n + 1}-0${day}`)
             } else {
                 var obje_selected = response.filter(item => item.startDate == `${curr_year}-${curr_month_n}-${day}`)
             }
@@ -224,6 +226,7 @@ function update(curr_date, curr_month_n, curr_year) {
         while(check % 7 !== 0) {
             check++;
         }
+
         var coll_left = check - count 
 
         for (let colls = 0; colls < coll_left; colls++) {
