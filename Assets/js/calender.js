@@ -144,7 +144,12 @@ let skips = 0;
 function showSlides(n) {
     skips += n
     let int_month = parseInt(curr_month_num)
-    let new_date = new Date(`${curr_year}-0${int_month += skips}-1`)
+    if (int_month < 10) {
+        var new_date = new Date(`${curr_year}-0${int_month += skips}-1`)
+    } else {
+        var new_date = new Date(`${curr_year}-${int_month += skips}-1`)
+    }
+    
     if (isValidDate(new_date)) {
         //keine ahnung wie ich jetzt heraudfinde ob ende monat oder anfang monat. macht zukunftsramez
         let new_month = new_date.toLocaleString('default', { month: 'long' });
@@ -238,6 +243,6 @@ function update(curr_date, curr_month_n, curr_year) {
             element.appendChild(grid_item)
         }
     });
-}
+ }
 
 
